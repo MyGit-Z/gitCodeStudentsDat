@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentsdat2.mapper.StudentUserMapper">
+    <insert id="insertStu">
+        insert into student_user (account, password, studentName, phone, headImg, question, answer, idCard)
+        values (#{user.account},
+                #{user.password},
+                #{user.studentName},
+                #{user.phone},
+                #{user.headImg},
+                #{user.question},
+                #{user.answer},
+                0)
+    </insert>
+
+    <update id="setPassword">
+        update  student_user set password = #{password} where account = #{account}
+    </update>
+
+    <update id="updateUser">
+        update student_user set
+                                password = #{user.password},
+                                studentName = #{user.studentName},
+                                headImg = #{user.headImg},
+                                answer = #{user.answer}
+        where id = #{user.id}
+    </update>
+
+    <select id="checkRepeat" resultType="java.lang.Integer">
+        select count(id)
+        from student_user
+        where account = #{account}
+    </select>
+
+
+    <select id="findQuestion" resultType="java.lang.String">
+        select  question from student_user where account = #{account} and phone = #{phone}
+    </select>
+
+    <select id="retrievePasswordT" resultType="java.lang.Integer">
+        select  id from student_user where account = #{account} and answer = #{answer}
+    </select>
+
+    <select id="login" resultType="com.example.studentsdat2.bean.StudentUser">
+        select * from student_user where account = #{account} and password =#{password}
+    </select>
+
+    <select id="findUser" resultType="java.lang.Integer">
+        select count(id) from student_user where account = #{account}
+    </select>
+    <select id="findStu" resultType="com.example.studentsdat2.bean.StudentUser">
+        select id,
+               account,
+               password,
+               studentName,
+               phone,
+               headImg,
+               question,
+               answer,
+               idCard
+        from student_user
+        where id = #{id}
+    </select>
+    <select id="showUer" resultType="com.example.studentsdat2.bean.StudentUser">
+        select  * from student_user
+        where id = #{id}
+    </select>
+</mapper>

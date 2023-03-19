@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentsdat2.mapper.TiebaMapper">
+
+    <insert id="insertTieba">
+        insert into  tieba
+        (
+         articleTitle,
+         articleContent,
+         img,
+         id,
+         studentName,
+         headImg,
+         commentNumber,
+         thumbUpNumber
+         )
+        values
+        (
+         #{tieba.articleTitle},
+         #{tieba.articleContent},
+         #{tieba.img},
+         #{tieba.id},
+         #{tieba.studentName},
+         #{tieba.headImg},
+         #{tieba.commentNumber},
+         #{tieba.thumbUpNumber}
+        )
+    </insert>
+    <insert id="creatComment">
+        insert into comment
+        (
+            articleId,
+            id,
+            studentName,
+            headImg,
+            commentOnContent,
+            imgComment
+        )
+        values (
+                #{comment.articleId},
+                #{comment.id},
+                #{comment.studentName},
+                #{comment.headImg},
+                #{comment.commentOnContent},
+                #{comment.imgComment}
+               )
+    </insert>
+
+    <update id="addCommentNumber">
+        update tieba set commentNumber = commentNumber + 1 where articleId = #{articleId}
+    </update>
+
+    <update id="thumbUp">
+        update tieba set thumbUpNumber = thumbUpNumber + 1 where articleId = #{articleId}
+    </update>
+    <update id="subCommentNumber">
+        update tieba set commentNumber = commentNumber - 1 where articleId = #{articleId}
+    </update>
+
+    <delete id="delTieba">
+        delete  from tieba where articleId = #{articleId}
+    </delete>
+    <delete id="delComment">
+        delete  from comment where commentId = #{commentId}
+    </delete>
+
+    <select id="showTieba" resultType="com.example.studentsdat2.bean.Tieba">
+        select articleId,
+               articleTitle,
+               articleContent,
+               img,
+               id,
+               studentName,
+               headImg,
+               commentNumber,
+               thumbUpNumber,
+               creatTime
+        from tieba
+        order by creatTime desc;
+    </select>
+
+    <select id="showComment" resultType="com.example.studentsdat2.bean.Comment">
+        select commentId,
+               articleId,
+               id,
+               studentName,
+               headImg,
+               commentOnContent,
+               imgComment,
+               commentDate
+        from comment
+        where articleId = #{articleId}
+        order by commentDate desc
+    </select>
+    <select id="findTieba" resultType="java.lang.Integer">
+        select articleId from comment where commentId = #{commentId}
+    </select>
+
+    <select id="findTiebaData" resultType="com.example.studentsdat2.bean.Tieba">
+        select articleId,
+               articleTitle,
+               articleContent,
+               img,
+               id,
+               studentName,
+               headImg,
+               commentNumber,
+               thumbUpNumber,
+               creatTime
+        from tieba
+        where articleId = #{articleId}
+    </select>
+</mapper>
