@@ -3,6 +3,7 @@ package com.example.studentsdat2.controller;
 
 import com.example.studentsdat2.bean.Comment;
 import com.example.studentsdat2.bean.Tieba;
+import com.example.studentsdat2.service.CreatService;
 import com.example.studentsdat2.service.TiebaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,10 @@ public class TiebaController {
 
     @Resource
     private TiebaService tiebaService;
+
+    //新加入的代码       
+    @Resource
+    private CreatService creatService;
 
     /**
      * 创建贴吧
