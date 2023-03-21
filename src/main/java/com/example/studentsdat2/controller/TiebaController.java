@@ -20,7 +20,7 @@ public class TiebaController {
     @Resource
     private TiebaService tiebaService;
 
-    //新加入的代码       是
+    //新加入的代码       是a
     @Resource
     private CreatService creatService;
 
