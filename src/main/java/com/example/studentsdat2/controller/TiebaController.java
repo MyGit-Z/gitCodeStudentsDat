@@ -21,7 +21,7 @@ public class TiebaController {
     private TiebaService tiebaService;
 
     /**
-     *   创建贴吧
+     *创建贴吧
      */
     @RequestMapping("/creatTie")
     public ResponseEntity<String> creatTie(@RequestBody Tieba tieba) {
